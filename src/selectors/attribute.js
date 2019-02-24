@@ -3,9 +3,9 @@ import unesc from "../util/unesc";
 import Namespace from './namespace';
 import {ATTRIBUTE} from './types';
 
-const deprecate = (fn, msg) => {
+const deprecate = (fn, msg) => () => {
     console.warn(fn, msg);
-}
+};
 
 const WRAPPED_IN_QUOTES = /^('|")(.*)\1$/;
 
