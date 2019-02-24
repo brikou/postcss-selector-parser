@@ -3,7 +3,7 @@ import unesc from "../util/unesc";
 import Namespace from './namespace';
 import {ATTRIBUTE} from './types';
 
-const {deprecate} = require("util");
+import {deprecate} from "util";
 
 const WRAPPED_IN_QUOTES = /^('|")(.*)\1$/;
 
