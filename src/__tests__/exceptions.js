@@ -19,8 +19,9 @@ throws('bad pseudo element', 'button::"after"');
 throws('missing closing parenthesis in pseudo', ':not([attr="test"]:not([attr="test"])');
 
 throws('bad syntax', '-moz-osx-font-smoothing: grayscale');
+throws('bad syntax (2)', '! .body');
 
 throws('missing backslash for semicolon', '.;');
-throws('missing backslash for semicolon', '.\;');
+throws('missing backslash for semicolon (2)', '.\;');
 throws('unexpected / foo', '-Option\/root', "Unexpected '/'. Escaping special characters with \\ may help.");
 throws('bang in selector', '.foo !optional', "Unexpected '!'. Escaping special characters with \\ may help.");

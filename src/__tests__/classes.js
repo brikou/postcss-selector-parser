@@ -49,3 +49,206 @@ test('escaped dot in class name', '.foo\\.bar', (t, tree) => {
     t.deepEqual(tree.nodes[0].nodes[0].value, 'foo.bar');
     t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'foo\\.bar');
 });
+
+test('class selector with escaping', '.♥', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '♥');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (1)', '.©', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '©');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (2)', '.“‘’”', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '“‘’”');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (3)', '.☺☃', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '☺☃');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (4)', '.⌘⌥', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '⌘⌥');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (5)', '.𝄞♪♩♫♬', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '𝄞♪♩♫♬');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (6)', '.💩', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '💩');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+});
+
+test('class selector with escaping (7)', '.\\?', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '?');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\?');
+});
+
+test('class selector with escaping (8)', '.\\@', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '@');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\@');
+});
+
+test('class selector with escaping (9)', '.\\.', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '.');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\.');
+});
+
+test('class selector with escaping (10)', '.\\3A \\)', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, ':)');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\3A \\)');
+});
+
+test('class selector with escaping (11)', '.\\3A \\`\\(', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, ':`(');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\3A \\`\\(');
+});
+
+test('class selector with escaping (12)', '.\\31 23', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '123');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\31 23');
+});
+
+test('class selector with escaping (13)', '.\\31 a2b3c', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '1a2b3c');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\31 a2b3c');
+});
+
+test('class selector with escaping (14)', '.\\<p\\>', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '<p>');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\<p\\>');
+});
+
+test('class selector with escaping (15)', '.\\<\\>\\<\\<\\<\\>\\>\\<\\>', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '<><<<>><>');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\<\\>\\<\\<\\<\\>\\>\\<\\>');
+});
+
+test('class selector with escaping (16)', '.\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\[\\>\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\>\\+\\<\\<\\<\\<\\-\\]\\>\\+\\+\\.\\>\\+\\.\\+\\+\\+\\+\\+\\+\\+\\.\\.\\+\\+\\+\\.\\>\\+\\+\\.\\<\\<\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\.\\>\\.\\+\\+\\+\\.\\-\\-\\-\\-\\-\\-\\.\\-\\-\\-\\-\\-\\-\\-\\-\\.\\>\\+\\.\\>\\.', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\[\\>\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\>\\+\\+\\+\\>\\+\\<\\<\\<\\<\\-\\]\\>\\+\\+\\.\\>\\+\\.\\+\\+\\+\\+\\+\\+\\+\\.\\.\\+\\+\\+\\.\\>\\+\\+\\.\\<\\<\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\+\\.\\>\\.\\+\\+\\+\\.\\-\\-\\-\\-\\-\\-\\.\\-\\-\\-\\-\\-\\-\\-\\-\\.\\>\\+\\.\\>\\.');
+});
+
+test('class selector with escaping (17)', '.\\#', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '#');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\#');
+});
+
+test('class selector with escaping (18)', '.\\#\\#', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '##');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\#\\#');
+});
+
+test('class selector with escaping (19)', '.\\#\\.\\#\\.\\#', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '#.#.#');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\#\\.\\#\\.\\#');
+});
+
+test('class selector with escaping (20)', '.\\_', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '_');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\_');
+});
+
+test('class selector with escaping (21)', '.\\{\\}', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '{}');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\{\\}');
+});
+
+test('class selector with escaping (22)', '.\\#fake\\-id', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '#fake-id');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\#fake\\-id');
+});
+
+test('class selector with escaping (23)', '.foo\\.bar', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'foo.bar');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'foo\\.bar');
+});
+
+test('class selector with escaping (24)', '.\\3A hover', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, ':hover');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\3A hover');
+});
+
+test('class selector with escaping (25)', '.\\3A hover\\3A focus\\3A active', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, ':hover:focus:active');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\3A hover\\3A focus\\3A active');
+});
+
+test('class selector with escaping (26)', '.\\[attr\\=value\\]', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '[attr=value]');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\[attr\\=value\\]');
+});
+
+test('class selector with escaping (27)', '.f\\/o\\/o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f/o/o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\/o\\/o');
+});
+
+test('class selector with escaping (28)', '.f\\\\o\\\\o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f\\o\\o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\\\o\\\\o');
+});
+
+test('class selector with escaping (29)', '.f\\*o\\*o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f*o*o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\*o\\*o');
+});
+
+test('class selector with escaping (30)', '.f\\!o\\!o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f!o!o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\!o\\!o');
+});
+
+test('class selector with escaping (31)', '.f\\\'o\\\'o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f\'o\'o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\\'o\\\'o');
+});
+
+test('class selector with escaping (32)', '.f\\~o\\~o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f~o~o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\~o\\~o');
+});
+
+test('class selector with escaping (33)', '.f\\+o\\+o', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, 'f+o+o');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, 'f\\+o\\+o');
+});
+
+test('class selector with escaping (34)', '.\\1D306', (t, tree) => {
+    t.deepEqual(tree.nodes[0].nodes[0].value, '𝌆');
+    t.deepEqual(tree.nodes[0].nodes[0].type, 'class');
+    t.deepEqual(tree.nodes[0].nodes[0].raws.value, '\\1D306');
+});
